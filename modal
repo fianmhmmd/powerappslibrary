@@ -1,0 +1,91 @@
+- recDarken:
+    Control: Rectangle@2.3.0
+    Group: grpModal
+    Properties:
+      BorderColor: =RGBA(0, 18, 107, 1)
+      Fill: =RGBA(0, 0, 0, 0.2)
+      Height: =Parent.Height
+      Visible: =showModal
+      Width: =Parent.Width
+- conModalItems:
+    Control: GroupContainer@1.3.0
+    Variant: ManualLayout
+    Group: grpModal
+    Properties:
+      DropShadow: =DropShadow.Regular
+      Fill: =RGBA(255, 255, 255, 1)
+      RadiusBottomLeft: =10
+      RadiusBottomRight: =10
+      RadiusTopLeft: =10
+      RadiusTopRight: =10
+      Visible: =showModal
+      X: =Parent.Width/2 - Self.Width/2
+      Y: =Parent.Height/2 - Self.Height/2
+    Children:
+      - btnCloseModal:
+          Control: Classic/Button@2.2.0
+          Properties:
+            BorderColor: =ColorFade(Self.Fill, -15%)
+            BorderStyle: =BorderStyle.None
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            DisabledColor: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(230, 230, 230, 1)
+            Font: =Font.'Open Sans'
+            HoverBorderColor: =ColorFade(Self.Fill, -20%)
+            HoverColor: =RGBA(0, 0, 0, 1)
+            HoverFill: =ColorFade(Self.Fill, -20%)
+            OnSelect: |-
+              =SubmitSkillsetNotification.Run(
+                  TextCanvas6.Text,
+                  DataCardValue12.Value,
+                  DataCardValue13.Value,
+                  DataCardValue14.Value,
+                  DataCardValue15.Value
+              );
+              SubmitForm(Form2);
+              ResetForm(Form2);
+              NewForm(Form2);
+              Navigate('Capability Catalogue',ScreenTransition.Fade);
+              UpdateContext({ showModal: false });
+            PressedBorderColor: =ColorFade(Self.Fill, -40%)
+            PressedColor: =RGBA(0, 0, 0, 1)
+            PressedFill: =ColorFade(Self.Fill, -40%)
+            RadiusBottomLeft: =5
+            RadiusBottomRight: =5
+            RadiusTopLeft: =5
+            RadiusTopRight: =5
+            Size: =11
+            Text: ="Confirm"
+            Width: =80
+            X: =Parent.Width - Self.Width - 20
+            Y: =Parent.Height - Self.Height - 20
+      - lblBody:
+          Control: Label@2.5.1
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Font: =Font.'Open Sans'
+            Text: ="Request Skillset Submit Success!"
+            Width: =402
+            X: =20
+            Y: =75
+      - lblTitle:
+          Control: Label@2.5.1
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =RGBA(9, 33, 98, 1)
+            Font: =Font.'Open Sans'
+            FontWeight: =FontWeight.Bold
+            Size: =16
+            Text: ="Confirmation"
+            X: =69
+            Y: =11
+      - SVG:
+          Control: Image@2.2.3
+          Properties:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            Height: =39
+            Image: ="data:image/svg+xml;utf8, "&EncodeUrl("<svg xmlns='http://www.w3.org/2000/svg' fill='#000000' aria-hidden='true' width='40px' height='40px' viewBox='0 0 20 20'><path d='M10 2a8 8 0 0 1 7.74 10.01l-.45-.9c-.09-.18-.2-.34-.32-.47a7 7 0 1 0-6.18 6.32L10.27 18H10a8 8 0 1 1 0-16Zm3.36 5.65c.17.17.2.44.06.63l-.06.07-4 4a.5.5 0 0 1-.64.07l-.07-.06-2-2a.5.5 0 0 1 .63-.77l.07.06L9 11.3l3.65-3.65c.2-.2.51-.2.7 0Zm1.24 3.9a1 1 0 0 1 1.8 0l3.5 7A1 1 0 0 1 19 20h-7a1 1 0 0 1-.9-1.45l3.5-7ZM16 13.5a.5.5 0 1 0-1 0v3a.5.5 0 1 0 1 0v-3Zm-.5 5.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1Z' fill='#000000'/></svg>")
+            Visible: =showModal
+            Width: =69
+            Y: =11
